@@ -1,0 +1,11 @@
+class,n,accuracy,most_confused_with
+T-shirt/top,1000,0.868,Shirt
+Trouser,1000,0.971,Dress
+Pullover,1000,0.787,Coat
+Dress,1000,0.916,T-shirt/top
+Coat,1000,0.799,Pullover
+Sandal,1000,0.947,Ankle boot
+Shirt,1000,0.642,T-shirt/top
+Sneaker,1000,0.959,Ankle boot
+Bag,1000,0.975,Shirt
+Ankle boot,1000,0.964,Sneaker
