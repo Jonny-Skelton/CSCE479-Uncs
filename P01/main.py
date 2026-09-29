@@ -34,6 +34,13 @@ def prepare_data(data, shuffle=False):
     data = data.cache()
     if shuffle:
         data = data.shuffle(10000, seed=seed)
+
+    # Convert integer class labels to one-hot vectors
+    data = data.map(
+        lambda x, y: (x, tf.one_hot(y, depth=10)),
+        num_parallel_calls=tf.data.AUTOTUNE
+    )
+
     data = data.batch(batch_size)
     data = data.prefetch(tf.data.AUTOTUNE)
     return data
@@ -103,7 +110,12 @@ model = tf.keras.models.load_model(save_path + best['run'] + '.keras')
 
 probs = model.predict(testing_set, verbose=0)
 preds = np.argmax(probs, axis=1)
-true_labels = np.concatenate([y for x, y in testing_set], axis=0)
+
+true_labels = np.concatenate(
+    [np.argmax(y.numpy(), axis=1) for x, y in testing_set],
+    axis=0
+)
+
 images = np.concatenate([x for x, y in testing_set], axis=0)
 
 n_test = len(true_labels)

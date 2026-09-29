@@ -12,5 +12,5 @@ def build_model(hidden_sizes, dropout_rate, lr):
             model.add(tf.keras.layers.Dropout(dropout_rate))
 
     model.add(tf.keras.layers.Dense(10, activation='softmax'))
-    model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=lr), loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=False), metrics=['accuracy'])
+    model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=lr), loss = tf.keras.losses.CategoricalCrossentropy(from_logits=False), metrics=['accuracy'])
     return model
